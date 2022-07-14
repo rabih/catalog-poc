@@ -4,10 +4,11 @@ import ProductListing from 'containers/ProductListing/ProductListing';
 import useProduct from 'hooks/useProduct';
 import testData from '../../testData';
 import "./Main.css"
+import InfiniteScroll from 'react-infinite-scroller';
 
 function Main({companyId}) {
 
-    const { isLoading: productLoading, products: fetchedProducts } = useProduct({companyId: companyId});
+    const { isLoading: productLoading, products: fetchedProducts, hasNextPage, fetchNextPage, isFetchingNextPage } = useProduct({companyId: companyId});
     const [selectedProducts, setSelectedProducts] = useState([]);
     const products = companyId ? fetchedProducts : testData?.data;
 
@@ -29,11 +30,13 @@ function Main({companyId}) {
     }
 
     return (
-        <div className="Main">
+        <InfiniteScroll hasMore={hasNextPage} loadMore={() => { fetchNextPage() }} 
+            className="Main">
             {products?.map(product => {
                 return <ProductListing key={product.id} product={product} onSelect={() => selectProduct(product.id)} onUnselect={() => unselectProduct}/>
             })}
-        </div>
+            { isFetchingNextPage ? <div>Loading...</div> : <div></div>}
+        </InfiniteScroll>
     )
 }
 
