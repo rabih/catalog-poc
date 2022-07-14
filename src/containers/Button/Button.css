@@ -6,3 +6,7 @@
     border-style: none;
     color: #FFF;
 }
+
+.Button:hover{
+    background:#2A4252;
+}
