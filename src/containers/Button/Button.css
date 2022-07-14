@@ -1,0 +1,8 @@
+.Button {
+    background: /*url(Noise-Template-Basic-800.png),*/ #228AFF;
+    background-blend-mode: overlay, normal;
+    border-radius: 100px;
+    font-family: 'Montserrat', sans-serif;
+    border-style: none;
+    color: #FFF;
+}
