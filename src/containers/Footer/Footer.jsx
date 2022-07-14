@@ -12,7 +12,8 @@ export const Footer = () => {
     return (
     <div className="Footer">
         <div className="Footer__powered">
-            <p>Powered by Convictional</p>
+            <p className="powered-text">Powered by</p>
+            <img className="powered-logo" src="https://mma.prnewswire.com/media/1632636/Convictional_Logo.jpg" />
         </div>
         <Button action={ctaAction} class="Footer__cta" text="Trade with us" />
     </div>
