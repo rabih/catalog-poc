@@ -11,6 +11,11 @@
 
 .Header__logo {
     margin-left: 2rem;
+    height: 75%;
+}
+
+.Header__logo > img {
+    height: 100%;
 }
 
 .Header__title {

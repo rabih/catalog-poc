@@ -1,4 +1,5 @@
 import useAuthMe from "hooks/useAuthMe";
+import logo from "images/go-coconut.jpg";
 import "./Header.css";
 
 export const Header = () => {
@@ -9,10 +10,10 @@ export const Header = () => {
     return (
     <div className="Header">
         <div className="Header__logo">
-            <h1>Logo</h1>
+            <img src={logo} alt="go coconut logo" />
         </div>
         <div className="Header__title">
-            <h2>{company?.name}</h2>
+            <h2>Summer Catalog 2022</h2>
         </div>
     </div>
     )
