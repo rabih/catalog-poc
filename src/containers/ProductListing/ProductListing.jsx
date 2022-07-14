@@ -1,7 +1,8 @@
 import React from 'react'
 import './ProductListing.css'
+import Button from 'containers/Button/Button';
 
-function ProductListing({product, onSelect, onUnselect}) {
+function ProductListing({isSelected, product, onSelect, onUnselect}) {
 
     const marginCalculator = (cost, price) => {
         const diff = price - cost;
@@ -29,20 +30,21 @@ function ProductListing({product, onSelect, onUnselect}) {
             <p className="product-description">{product.description}</p>
             <div className="ProductListing__pricing-wrapper">
                 <div className="pricing-wrapper__price-line">
-                    <p className="product-cost-label">Dropship Cost:</p>
-                    <p className="product-cost">From: ${dropshipCost}</p>
+                    <p className="product-cost-label">Dropship:</p>
+                    <p className="product-cost">From ${dropshipCost}</p>
                     <p className="product-cost-label">MSRP:</p>
-                    <p className="product-cost">From: ${dropshipPrice}</p>
+                    <p className="product-cost">From ${dropshipPrice}</p>
                     <p className="product-margin">{marginCalculator(dropshipCost, dropshipPrice)}%</p>
                 </div>
                 <div className="pricing-wrapper__price-line">
-                <p className="product-cost-label">Wholesale Cost:</p>
-                    <p className="product-cost">From: ${wholesaleCost}</p>
+                <p className="product-cost-label">Wholesale:</p>
+                    <p className="product-cost">From ${wholesaleCost}</p>
                     <p className="product-cost-label">MSRP:</p>
-                    <p className="product-cost">From: ${wholesalePrice}</p>
+                    <p className="product-cost">From ${wholesalePrice}</p>
                     <p className="product-margin">{marginCalculator(wholesaleCost, wholesalePrice)}%</p>
                 </div>
             </div>
+        { isSelected ? <Button action={onUnselect} class="ProductListing__deselect-button" text="Deselect" /> : <Button action={onSelect} class="ProductListing__select-button" text="Select" /> }
             </div>
         </div>
     );

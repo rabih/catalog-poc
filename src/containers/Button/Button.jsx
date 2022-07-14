@@ -5,7 +5,7 @@ function Button(props) {
 
     return (
         <>
-            <button type="button" className="Button" id={props.class}>{props.text}</button>
+            <button type="button" onClick={props.action} className={`${props.class} Button`} >{props.text}</button>
         </>
     )
 }
