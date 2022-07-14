@@ -1,12 +1,14 @@
 import Footer from 'containers/Footer/Footer';
 import Header from 'containers/Header/Header';
+import Main from 'containers/Main/Main';
 import './App.css';
+import testData from '../../testData';
 
 function App() {
   return (
     <div className="App">
       <Header></Header>
-      <h1>Insert mosiac list</h1>
+      <Main data={testData}></Main>
       <Footer></Footer>
     </div>
   );
