@@ -11,6 +11,14 @@
 
 .Footer__powered {
     margin-left:2rem;
+    display:flex;
+    align-items: center;
+}
+
+.powered-logo {
+    margin-left: 1rem;
+    height: 25px;
+    width: auto;
 }
 
 .Footer__cta {
