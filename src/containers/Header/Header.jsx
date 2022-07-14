@@ -1,10 +1,12 @@
+import "./Header.css";
+
 export const Header = () => {
     return (
     <div className="Header">
-        <div className="Header__Logo">
-            <h1>this will be a logo</h1>
+        <div className="Header__logo">
+            <h1>Logo</h1>
         </div>
-        <div className="Header__Title">
+        <div className="Header__title">
             <h2>this will be a title</h2>
         </div>
     </div>

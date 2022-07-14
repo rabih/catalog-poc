@@ -1,10 +1,11 @@
 import ProductListing from 'containers/ProductListing/ProductListing';
 import React, { useState } from 'react'
+import "./Main.css"
 
 function Main(props) {
 
     const [products, setProducts] = useState(props.data);
-    console.log(products.data)
+
     return (
         <div className="Main">
             {products.data.map(product => {

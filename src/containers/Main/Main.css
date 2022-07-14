@@ -1,0 +1,7 @@
+.Main {
+    padding: 8rem 2rem 6rem 2rem;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #F9F9F9;
+}
