@@ -1,44 +1,48 @@
-import { useQuery } from "react-query";
+import { useState } from "react";
+import { useInfiniteQuery, useQuery } from "react-query";
+import { getRequest } from "utils/requests";
 
-const useProduct = ({companyId}) => {
+const PRODUCTS_QUERY_KEY = 'products';
+const PRODUCTS_PAGE_LIMIT = 30;
+const TEN_MINUTES = 10 * 60 * 1000;
 
-  const getProduct = async () => {
+const useProduct = ({companyId, enabled}) => {
+  const [products, setProducts] = useState([]);
 
-    /* hasMore: bool
-      next: string (url)
-      previous: string (url)
-      data: [{}]
-      error: Error */
+  const getProducts = async (params) => {
 
-    const res = await fetch("https://api.convictional.com/buyer/products", {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'DLKMRheFhC9IZL40pAgkHWB98aye8epC',
-        'Access-Control-Allow-Origin': '*',
-      }
-    });
-    let products = await res.json();
-    if (companyId) {
-      products.data = products?.data?.filter(product => product.companyId === companyId)
+    const res =  await getRequest('/buyer/products', params);
+    if (companyId && products) {
+      res.data = res?.data?.filter(product => product.companyId === companyId);
     }
-    return products
+    return res;
   }
 
-  const { data: productResponse, isLoading: productLoading } = useQuery(
-    'product',
-    () => getProduct(),
+  const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
+    PRODUCTS_QUERY_KEY,
+    ({ pageParam = 0 }) => getProducts({ limit: PRODUCTS_PAGE_LIMIT, page: pageParam }),
     {
-      staleTime: 30000, // 30 seconds until stale
-      enabled: true,
-      onError: err => {
-          console.error(`Failed to fetch price list ${err}`);
+      enabled,
+      staleTime: TEN_MINUTES,
+      cacheTime: TEN_MINUTES,
+      onSuccess: ({ pages }) => {
+        const lastPage = pages[pages.length - 1];
+        const shouldFetchMore = lastPage.data?.length === PRODUCTS_PAGE_LIMIT;
+        if (shouldFetchMore) {
+          fetchNextPage({ pageParam: pages.length });
+          return;
+        }
+        const allProducts = pages.reduce((list, page) => [...list, ...page.data], []);
+        setProducts(allProducts);
       },
     }
   );
 
   return {
-    productResponse,
-    productLoading,
+    products,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage
   };
 };
 

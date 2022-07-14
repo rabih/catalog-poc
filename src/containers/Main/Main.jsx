@@ -7,9 +7,9 @@ import "./Main.css"
 
 function Main({companyId}) {
 
-    const { productLoading, productResponse } = useProduct({companyId: companyId});
+    const { isLoading: productLoading, products: fetchedProducts } = useProduct({companyId: companyId});
     const [selectedProducts, setSelectedProducts] = useState([]);
-    const products = companyId ? productResponse?.data : testData?.data;
+    const products = companyId ? fetchedProducts : testData?.data;
 
     const selectProduct = (productId) => {
         if (selectedProducts.filter(sp => sp.id === productId)) //if the product is already selected we avoid this
