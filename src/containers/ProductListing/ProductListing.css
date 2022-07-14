@@ -1,8 +1,19 @@
 .ProductListing {
     width: 20rem;
-    height: 20rem;
+    height: 35rem;
     margin: 1rem;
     border-radius: 12px;
     background-color: #FFF;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.product-image {
+    max-width: 90%;
+}
+
+.product-description {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
